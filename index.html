@@ -12,13 +12,17 @@
 
 <script>
 	$( document ).ready(function() {
+		var waiting = false;
 		var window_focus = true;
 
 		$(window).blur(function() {
-		    window_focus = false;
+			if (waiting) {
+				window_focus = false;
+			}
 	    });
 
 		$('#mush').one("click", function() {
+			waiting = true;
 			$("#mush").attr('src', 'images/green.png');
 			var loop = setInterval(function() {
 				if (!window_focus) {
